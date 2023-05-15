@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 1745140462}
   - component: {fileID: 1745140465}
   - component: {fileID: 1745140464}
+  - component: {fileID: 1745140466}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -446,5 +447,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 151669103}
-  mainMenu: {fileID: 554043588751307169, guid: 49ba444c8b72c58478a20309a190312b, type: 3}
-  survey: {fileID: 3405459452544076943, guid: ec7d67e942e7f874d8da9663cb6eff58, type: 3}
+  mainMenuScreen: {fileID: 554043588751307169, guid: 49ba444c8b72c58478a20309a190312b, type: 3}
+  surveyScreen: {fileID: 3405459452544076943, guid: ec7d67e942e7f874d8da9663cb6eff58, type: 3}
+  scoreScreen: {fileID: 4191071891404202314, guid: 092aca08ef3a5344a9775e29dc11622d, type: 3}
+--- !u!114 &1745140466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745140461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee03ba591ad28b48af3f9c667490bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

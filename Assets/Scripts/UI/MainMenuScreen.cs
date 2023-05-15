@@ -4,28 +4,37 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenuScreen : MonoBehaviour
     {
         [SerializeField] private Button startButton;
         [SerializeField] private Button exitButton;
         [SerializeField] private TextMeshProUGUI scoreValue;
+        
+        public static MainMenuScreen Instance { get; set; }
 
         private void Awake()
         {
-            startButton.onClick.AddListener(ShowSurveyScreen);
-            exitButton.onClick.AddListener(ExitApp);
+            if (Instance == null)
+            {
+                Instance = this;
+                return;
+            }
+
+            Destroy(gameObject);
         }
 
         private void Start()
         {
             if (PlayerPrefs.HasKey("bestScore"))
                 SetBestScore();
+            startButton.onClick.AddListener(ShowSurveyScreen);
+            exitButton.onClick.AddListener(ExitApp);
         }
 
         private void ShowSurveyScreen()
         {
-            UISystem.Instance.ShowSurveyScreen();
-            gameObject.SetActive(false);
+            UISystem.Instance.InstantiateSurveyScreen();
+            Instance.gameObject.SetActive(false);
         }
 
         private void SetBestScore() => scoreValue.text = PlayerPrefs.GetInt("bestScore").ToString();

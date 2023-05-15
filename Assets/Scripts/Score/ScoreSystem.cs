@@ -5,8 +5,9 @@ namespace Score
     public class ScoreSystem : MonoBehaviour
     {
         public int CurrentScore { get; private set; }
+        public bool PassedTest { get; set; }
 
-        public static ScoreSystem Instance { get; set; }
+        public static ScoreSystem Instance { get; private set; }
         
         private void Awake()
         {
