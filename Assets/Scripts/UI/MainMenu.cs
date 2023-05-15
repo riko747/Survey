@@ -1,14 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace UI
 {
     public class MainMenu : MonoBehaviour
     {
-        [Inject] private IUiSystem _uiSystem;
-        
         [SerializeField] private Button startButton;
         [SerializeField] private Button exitButton;
         [SerializeField] private TextMeshProUGUI scoreValue;
@@ -19,15 +16,19 @@ namespace UI
             exitButton.onClick.AddListener(ExitApp);
         }
 
-        private void ShowSurveyScreen()
+        private void Start()
         {
-            _uiSystem.ShowSurveyScreen();
+            if (PlayerPrefs.HasKey("bestScore"))
+                SetBestScore();
         }
 
-        public void SetBestScore()
+        private void ShowSurveyScreen()
         {
-            scoreValue.text = PlayerPrefs.GetInt("bestScore").ToString();
+            UISystem.Instance.ShowSurveyScreen();
+            gameObject.SetActive(false);
         }
+
+        private void SetBestScore() => scoreValue.text = PlayerPrefs.GetInt("bestScore").ToString();
 
         private void ExitApp() => Application.Quit();
 

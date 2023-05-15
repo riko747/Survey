@@ -195,10 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828802213a5a0a849931c04743c60dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentQuestion: {fileID: 0}
-  answerButtonPrefab: {fileID: 0}
-  answersParent: {fileID: 0}
-  questionData: {fileID: 0}
+  currentQuestion: {fileID: 677947908657531979}
+  answersParent: {fileID: 8298879170773297793}
+  questionData: {fileID: 11400000, guid: 01f486fb43c25f14ba05f2aa319e9889, type: 2}
 --- !u!1 &8603924213158668883
 GameObject:
   m_ObjectHideFlags: 0

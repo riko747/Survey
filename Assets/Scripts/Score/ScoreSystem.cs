@@ -2,19 +2,35 @@ using UnityEngine;
 
 namespace Score
 {
-    internal interface IScoreSystem
+    public class ScoreSystem : MonoBehaviour
     {
-        void UpdateScore();
-    }
-    public class ScoreSystem : MonoBehaviour, IScoreSystem
-    {
-        private int _currentScore;
+        public int CurrentScore { get; private set; }
+
+        public static ScoreSystem Instance { get; set; }
+        
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                return;
+            }
+            Destroy(gameObject);
+        }
         
         public void UpdateScore()
         {
-            _currentScore += 1;
-            if (_currentScore > PlayerPrefs.GetInt("bestScore"))
-                PlayerPrefs.SetInt("bestScore", _currentScore);
+            CurrentScore += 1;
+            SaveScoreInPlayerPrefs();
+        }
+
+        private void SaveScoreInPlayerPrefs()
+        {
+            var bestScore = PlayerPrefs.GetInt("bestScore", 0);
+            if (CurrentScore <= bestScore) return;
+            
+            PlayerPrefs.SetInt("bestScore", CurrentScore);
+            PlayerPrefs.Save();
         }
     }
 }

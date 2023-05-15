@@ -10,7 +10,7 @@ namespace SurveyScreen
         [SerializeField] private TextMeshProUGUI answerText;
 
         public Button Button => button;
-        public TextMeshProUGUI AnswerText { get; set; }
+        public TextMeshProUGUI AnswerText => answerText;
         public bool IsValidAnswer { get; set; }
 
         private void OnDestroy() => button.onClick.RemoveAllListeners();
