@@ -13,9 +13,6 @@ namespace UI
 
         public static UISystem Instance { get; set; }
 
-        public MainMenuScreen MainMenuScreen { get; set; }
-        public ScoreScreen ScoreScreen { get; set; }
-
         private void Awake()
         {
             if (Instance == null)
@@ -28,7 +25,6 @@ namespace UI
         }
 
         public void InstantiateMainMenu() => Instantiate(mainMenuScreen, canvas.transform);
-
         public void InstantiateSurveyScreen() => Instantiate(surveyScreen, canvas.transform);
         private void InstantiateScoreScreen() => Instantiate(scoreScreen, canvas.transform);
 

@@ -12,6 +12,7 @@ namespace Survey
     public class SurveyScreen : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI currentQuestion;
+        [SerializeField] private TextMeshProUGUI timeLabel;
         [SerializeField] private Transform answersParent;
         [SerializeField] private QuestionData questionData;
         
@@ -20,6 +21,7 @@ namespace Survey
         private List<AnswerButton> _answerButtons = new();
         
         public static SurveyScreen Instance { get; set; }
+        public TextMeshProUGUI TimeLabel => timeLabel;
 
         private void Awake()
         {
@@ -35,6 +37,7 @@ namespace Survey
         private void Start()
         {
             ShowNewQuestion();
+            StartCoroutine(TimeSystem.Instance.TimerCoroutine());
         }
 
         private void ShowNewQuestion()
@@ -83,8 +86,6 @@ namespace Survey
                 }
 
             }
-
-            Debug.Log("Score: " + ScoreSystem.Instance.CurrentScore);
             _currentQuestionIndex++;
             ShowNewQuestion();
         }
