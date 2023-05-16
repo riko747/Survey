@@ -50,6 +50,6 @@ namespace UI
             Instantiate(UISystem.Instance.MainMenuScreen, UISystem.Instance.CanvasTransform);
         }
 
-        public override Screen GetGameObject() => Instance;
+        public override Screen GetScreen() => Instance;
     }
 }

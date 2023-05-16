@@ -7,7 +7,7 @@ namespace UI
     public abstract class Screen : MonoBehaviour
     {
         public abstract void InstantiateScreen();
-        public abstract Screen GetGameObject();
+        public abstract Screen GetScreen();
     }
     
     public class UISystem : MonoBehaviour
@@ -37,10 +37,10 @@ namespace UI
         public void ShowScreen(Screen screen)
         {
             DeactivateAllScreens();
-            if (!screen.GetGameObject())
+            if (!screen.GetScreen())
                 screen.InstantiateScreen();
             else
-                screen.GetGameObject().gameObject.SetActive(true);
+                screen.GetScreen().gameObject.SetActive(true);
         }
         
         private void DeactivateAllScreens()

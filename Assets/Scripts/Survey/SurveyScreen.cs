@@ -54,7 +54,7 @@ namespace Survey
                 CreateRandomQuestionsSequence();
         }
 
-        public override Screen GetGameObject() => Instance;
+        public override Screen GetScreen() => Instance;
         public override void InstantiateScreen() => Instantiate(UISystem.Instance.SurveyScreen, UISystem.Instance.CanvasTransform);
 
         private void ShowNewQuestion()

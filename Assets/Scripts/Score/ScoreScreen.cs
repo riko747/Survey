@@ -35,7 +35,7 @@ namespace Score
             SetSpentTime();
         }
 
-        public override Screen GetGameObject() => Instance;
+        public override Screen GetScreen() => Instance;
         public override void InstantiateScreen() => Instantiate(UISystem.Instance.ScoreScreen, UISystem.Instance.CanvasTransform);
         
         private void ShowMainMenu() => UISystem.Instance.ShowScreen(MainMenuScreen.Instance);
