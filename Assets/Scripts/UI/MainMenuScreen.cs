@@ -28,13 +28,14 @@ namespace UI
             startButton.onClick.AddListener(() => UISystem.Instance.ShowScreen(UISystem.Instance.SurveyScreen));
             exitButton.onClick.AddListener(ExitApp);
         }
-
+        
         private void OnEnable()
         {
             if (PlayerPrefs.HasKey("bestScore"))
                 SetBestScore();
         }
-
+        
+        //Setting the highest score in the Main Menu screen when the player enters the game
         private void SetBestScore() => scoreValue.text = PlayerPrefs.GetInt("bestScore").ToString();
 
         private void ExitApp() => Application.Quit();
@@ -45,11 +46,10 @@ namespace UI
             exitButton.onClick.RemoveListener(ExitApp);
         }
 
-        public override void InstantiateScreen()
-        {
-            Instantiate(UISystem.Instance.MainMenuScreen, UISystem.Instance.CanvasTransform);
-        }
-
+        //Instantiating main menu screen
+        public override void InstantiateScreen() => Instantiate(UISystem.Instance.MainMenuScreen, UISystem.Instance.CanvasTransform);
+        
+        //Checking that main menu screen is existing on scene hierarchy
         public override Screen GetScreen() => Instance;
     }
 }

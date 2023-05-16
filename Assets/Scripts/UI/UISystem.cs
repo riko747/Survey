@@ -34,6 +34,7 @@ namespace UI
             Destroy(gameObject);
         }
 
+        //Logic of display and instantiation of game screens.
         public void ShowScreen(Screen screen)
         {
             DeactivateAllScreens();
@@ -43,6 +44,7 @@ namespace UI
                 screen.GetScreen().gameObject.SetActive(true);
         }
         
+        //Logic of deactivating all game screens, before showing only one
         private void DeactivateAllScreens()
         {
             if (SurveyScreen.Instance)

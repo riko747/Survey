@@ -19,12 +19,14 @@ namespace Score
             Destroy(gameObject);
         }
         
+        //Updating the actual points scored by the player
         public void UpdateScore()
         {
             CurrentScore += 1;
             SaveScoreInPlayerPrefs();
         }
 
+        //Storing the player's highest point value in PlayerPrefs
         private void SaveScoreInPlayerPrefs()
         {
             var bestScore = PlayerPrefs.GetInt("bestScore", 0);

@@ -19,6 +19,7 @@ public class TimeSystem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //Coroutine for calculating the time of passing the test
     public IEnumerator TimerCoroutine()
     {
         var elapsedTime = 0f;

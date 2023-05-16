@@ -44,6 +44,7 @@ namespace Survey
             StartCoroutine(TimeSystem.Instance.TimerCoroutine());
         }
 
+        //Refreshing survey counters, score, creating random questions sequence if user chooses random questions sequence
         private void RefreshCountersData()
         {
             _currentQuestionIndex = 0;
@@ -54,9 +55,12 @@ namespace Survey
                 CreateRandomQuestionsSequence();
         }
 
+        //Checking that survey screen is existing on scene hierarchy
         public override Screen GetScreen() => Instance;
+        //Instantiating survey screen
         public override void InstantiateScreen() => Instantiate(UISystem.Instance.SurveyScreen, UISystem.Instance.CanvasTransform);
 
+        //Showing all question, answers data on screen
         private void ShowNewQuestion()
         {
             if (_currentQuestionIndex >= questionData.questions.Count || _randomQuestionsSequenceCounter >= questionData.questions.Count)
@@ -118,6 +122,7 @@ namespace Survey
             }
         }
 
+        //Checking that user failed or completed test and showing next question depending on the result
         private void PrepareToNextQuestion(AnswerButton currentButton, bool valid)
         {
             currentButton.IsValidAnswer = false;
@@ -139,6 +144,7 @@ namespace Survey
             ShowNewQuestion();
         }
 
+        //Activating/Deactivating answer buttons depending on answers number
         private void RefreshSurveyToNextQuestion()
         {
             foreach (Transform answerButton in answersParent.transform)
