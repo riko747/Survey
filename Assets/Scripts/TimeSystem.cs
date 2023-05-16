@@ -6,6 +6,7 @@ using UnityEngine;
 public class TimeSystem : MonoBehaviour
 {
     public static TimeSystem Instance { get; set; }
+    public string CurrentTime { get; set; }
 
     private void Awake()
     {
@@ -24,12 +25,14 @@ public class TimeSystem : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-            
-            elapsedTime += 1;
             var time = TimeSpan.FromSeconds(elapsedTime);
 
             SurveyScreen.Instance.TimeLabel.text = time.ToString("mm\\:ss");
+            CurrentTime = time.ToString("mm\\:ss");
+            yield return new WaitForSeconds(1f);
+            
+            elapsedTime += 1;
+            
         }
     }
 }

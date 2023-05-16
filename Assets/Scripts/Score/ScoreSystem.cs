@@ -4,7 +4,7 @@ namespace Score
 {
     public class ScoreSystem : MonoBehaviour
     {
-        public int CurrentScore { get; private set; }
+        public int CurrentScore { get; set; }
         public bool PassedTest { get; set; }
 
         public static ScoreSystem Instance { get; private set; }

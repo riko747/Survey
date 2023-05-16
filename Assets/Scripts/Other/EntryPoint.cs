@@ -5,6 +5,6 @@ namespace Other
 {
     public class EntryPoint : MonoBehaviour
     {
-        private void Start() => UISystem.Instance.InstantiateMainMenu();
+        private void Start() => UISystem.Instance.ShowScreen(UISystem.Instance.MainMenuScreen);
     }
 }

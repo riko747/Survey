@@ -2,10 +2,11 @@ using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Screen = UI.Screen;
 
 namespace Score
 {
-    public class ScoreScreen : MonoBehaviour
+    public class ScoreScreen : Screen
     {
         [SerializeField] private GameObject congratulationsLabel;
         [SerializeField] private GameObject failLabel;
@@ -23,33 +24,29 @@ namespace Score
             }
 
             Destroy(gameObject);
-            
+        }
+
+        private void Start() => mainMenuButton.onClick.AddListener(ShowMainMenu);
+
+        private void OnEnable()
+        {
             SetWinOrLoseLabel();
             SetScore();
+            SetSpentTime();
         }
 
-        private void Start()
-        {
-            mainMenuButton.onClick.AddListener(ShowMainMenu);
-        }
-
+        public override Screen GetGameObject() => Instance;
+        public override void InstantiateScreen() => Instantiate(UISystem.Instance.ScoreScreen, UISystem.Instance.CanvasTransform);
+        
+        private void ShowMainMenu() => UISystem.Instance.ShowScreen(MainMenuScreen.Instance);
+        private void SetSpentTime() => spentTimeLabel.text = TimeSystem.Instance.CurrentTime;
+        private void SetScore() => scoreLabel.text = ScoreSystem.Instance.CurrentScore.ToString();
+        private void OnDestroy() => mainMenuButton.onClick.RemoveListener(ShowMainMenu);
+        
         private void SetWinOrLoseLabel()
         {
-            if (ScoreSystem.Instance.PassedTest)
-                congratulationsLabel.SetActive(true);
-            else
-                failLabel.SetActive(true);
+            congratulationsLabel.SetActive(ScoreSystem.Instance.PassedTest);
+            failLabel.SetActive(!ScoreSystem.Instance.PassedTest);
         }
-
-        private void ShowMainMenu() => UISystem.Instance.ShowScreen(MainMenuScreen.Instance.gameObject);
-
-        private void SetSpentTime()
-        {
-            
-        }
-
-        private void SetScore() => scoreLabel.text = ScoreSystem.Instance.CurrentScore.ToString();
-
-        private void OnDestroy() => mainMenuButton.onClick.RemoveListener(ShowMainMenu);
     }
 }

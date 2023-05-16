@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenuScreen : MonoBehaviour
+    public class MainMenuScreen : Screen
     {
         [SerializeField] private Button startButton;
         [SerializeField] private Button exitButton;
@@ -25,16 +25,14 @@ namespace UI
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey("bestScore"))
-                SetBestScore();
-            startButton.onClick.AddListener(ShowSurveyScreen);
+            startButton.onClick.AddListener(() => UISystem.Instance.ShowScreen(UISystem.Instance.SurveyScreen));
             exitButton.onClick.AddListener(ExitApp);
         }
 
-        private void ShowSurveyScreen()
+        private void OnEnable()
         {
-            UISystem.Instance.InstantiateSurveyScreen();
-            Instance.gameObject.SetActive(false);
+            if (PlayerPrefs.HasKey("bestScore"))
+                SetBestScore();
         }
 
         private void SetBestScore() => scoreValue.text = PlayerPrefs.GetInt("bestScore").ToString();
@@ -43,8 +41,15 @@ namespace UI
 
         private void OnDestroy()
         {
-            startButton.onClick.RemoveListener(ShowSurveyScreen);
+            startButton.onClick.RemoveListener(() => UISystem.Instance.ShowScreen(UISystem.Instance.SurveyScreen));
             exitButton.onClick.RemoveListener(ExitApp);
         }
+
+        public override void InstantiateScreen()
+        {
+            Instantiate(UISystem.Instance.MainMenuScreen, UISystem.Instance.CanvasTransform);
+        }
+
+        public override Screen GetGameObject() => Instance;
     }
 }

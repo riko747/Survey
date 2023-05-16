@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace UI
 {
+    public abstract class Screen : MonoBehaviour
+    {
+        public abstract void InstantiateScreen();
+        public abstract Screen GetGameObject();
+    }
+    
     public class UISystem : MonoBehaviour
     {
         [SerializeField] private Canvas canvas;
@@ -12,6 +18,10 @@ namespace UI
         [SerializeField] private ScoreScreen scoreScreen;
 
         public static UISystem Instance { get; set; }
+        public Transform CanvasTransform => canvas.transform;
+        public MainMenuScreen MainMenuScreen => mainMenuScreen;
+        public SurveyScreen SurveyScreen => surveyScreen;
+        public ScoreScreen ScoreScreen => scoreScreen;
 
         private void Awake()
         {
@@ -24,32 +34,24 @@ namespace UI
             Destroy(gameObject);
         }
 
-        public void InstantiateMainMenu() => Instantiate(mainMenuScreen, canvas.transform);
-        public void InstantiateSurveyScreen() => Instantiate(surveyScreen, canvas.transform);
-        private void InstantiateScoreScreen() => Instantiate(scoreScreen, canvas.transform);
-
-        public void ShowScoreScreen()
-        {
-            if (FindObjectOfType<ScoreScreen>() == null)
-                InstantiateScoreScreen();
-            else
-                ShowScreen(ScoreScreen.Instance.gameObject);
-        }
-
-        public void ShowScreen(GameObject screen)
+        public void ShowScreen(Screen screen)
         {
             DeactivateAllScreens();
-            screen.SetActive(true);
+            if (!screen.GetGameObject())
+                screen.InstantiateScreen();
+            else
+                screen.GetGameObject().gameObject.SetActive(true);
         }
-
+        
         private void DeactivateAllScreens()
         {
-            if (mainMenuScreen)
-                MainMenuScreen.Instance.gameObject.SetActive(false);
-            if (surveyScreen)
+            if (SurveyScreen.Instance)
                 SurveyScreen.Instance.gameObject.SetActive(false);
-            if (scoreScreen)
+            if (MainMenuScreen.Instance)
+                MainMenuScreen.Instance.gameObject.SetActive(false);
+            if (ScoreScreen.Instance)
                 ScoreScreen.Instance.gameObject.SetActive(false);
+
         }
     }
 }
