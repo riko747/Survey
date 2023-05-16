@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bf649593cf5d746a2e05a1b501228d, type: 3}
   m_Name: QuestionData
   m_EditorClassIdentifier: 
-  random: 0
+  random: 1
   questions:
   - question: What is the name of the capital of Ukraine?
     answers:
